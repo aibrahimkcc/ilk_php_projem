@@ -8,10 +8,7 @@ define('APP_PATH', $root . 'app' . DIRECTORY_SEPARATOR);
 define('FILES_PATH', $root . 'transaction_files' . DIRECTORY_SEPARATOR);
 define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
 
-$dir=scandir(FILES_PATH);
-var_dump($dir);
-
-
+require '../app/App.php';
 
 /* YOUR CODE (Instructions in README.md) */
 ?>
@@ -42,6 +39,7 @@ var_dump($dir);
         </style>
     </head>
     <body>
+        <h1 style="text-align:center; " >My first Project</h1>
         <table>
             <thead>
                 <tr>
@@ -54,27 +52,39 @@ var_dump($dir);
             <tbody>
                 <!-- YOUR CODE -->
                 <?php
-                //<tr>
-                //    <td>Date</td>
-                //    <td>Check </td>
-                //    <td>Description</td>
-                //    <td>Amount</td>
-                //</tr>
+                foreach ($array as $ars){
+                echo '<tr>';
+                    echo '<td>'.date('M j, Y',strtotime($ars[0])).'</td>';
+                    echo '<td>'.$ars[1]. '</td>';
+                    echo '<td >'.$ars[2].'</td>';
+                    if($ars[3][0]!== '-'){
+                    echo '<td style=\'color:green\'>'.$ars[3].'</td>';
+                } else {
+                    echo '<td style=\'color:red\'>'.$ars[3].'</td>';
+                }
+
+                echo '</tr>';
+                }
                 ?>
+                
+                
 
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td style='color:green'><?php echo '$'.number_format($kar,2,'.',',');;
+
+                            ?>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td style='color:red'><?php echo '$'.number_format($zarar,2,'.',',');;  ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?php echo '$'.number_format($kar+$zarar,2,'.',','); ?></td>
                 </tr>
             </tfoot>
         </table>
